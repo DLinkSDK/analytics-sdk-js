@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script type='text/javascript'>
+    (function (e, t, n) {
+        if (e.analytics) return;
+        var a = e.analytics = function () {
+            a.handleRequest ? a.handleRequest.apply(a, arguments) : a.queue.push(arguments)
+        };
+        a.queue = [];
+        var s = 'script';
+        r = t.createElement(s);
+        r.async = !0;
+        r.src = n;
+        var u = t.getElementsByTagName(s)[0];
+        u.parentNode.insertBefore(r, u);
+    })(window, document, 'https://jssdk.deeplink.dev/analytics/1.4.7-beta/analytics.min.js');
+    analytics('setup', {
+        accountId: "your_accountId",
+        devToken: "your_devToken",
+        cryptKey: "your_cryptKey",
+        /// optional
+        minReportInterval: 10, // unit: s
+        maxReportNumEachTime: 5,
+        debugMode: true,
+        enabledInterval: true,
+        appVersion: "1.0.0",
+    });
+    onClickCustomRegister()
+
+    function onClickButtonClick() {
+        analytics('addCustomParams', {
+            custom_dd: 6666,
+            custom_searchParams: `${window.location.search}`
+        });
+    }
+
+    function onClickFlush() {
+        analytics('flush');
+    }
+
+    function onClickLog(priority) {
+        analytics('log', "eventName_test_log", {event_sd: "xxx"}, priority)
+    }
+
+
+    function onClickCustomRegister() {
+        analytics('register', {
+            sender: function (pkg, finished) {
+                (async () => {
+                    try {
+                        let response = await fetch('http://example.com/api/event/track', {
+                            method: 'POST',
+                            body: JSON.stringify(pkg),
+                            headers: {
+                                'X-AccountId': "accountId"
+                            },
+                            signal: AbortSignal.timeout(2000)
+                        });
+                        finished(response.ok ?? true);
+                    } catch (e) {
+                        finished(false)
+                    }
+                })();
+            }
+        })
+    }
+
+    function onClickRegister() {
+        analytics('register')
+    }
+
+</script>
+
+<h1>Event Tests</h1>
+<button onclick="onClickButtonClick()">addCustomParams</button>
+<button onclick="onClickRegister()"> register</button>
+<button onclick="onClickLog(0)"> log priority = 0</button>
+<button onclick="onClickLog(1)"> log priority = 1</button>
+<button onclick="onClickFlush()"> flush</button>
+
+</body>
+</html>
