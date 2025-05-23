@@ -6,7 +6,7 @@ Register an account at https://console.dlink.cloud. After creating an app on the
 
 ### Step 2: Integrate the SDK and complete event reporting
 
-JS-SDK: [https://jssdk.deeplink.dev/analytics/1.4.7-beta/analytics.min.js](https://jssdk.deeplink.dev/analytics/1.4.7-beta/analytics.min.js)
+JS-SDK: [https://jssdk.deeplink.dev/analytics/1.4.7-beta1/analytics.min.js](https://jssdk.deeplink.dev/analytics/1.4.7-beta1/analytics.min.js)
 
 ### Step 3: Initialize the SDK
 
@@ -31,10 +31,10 @@ JS-SDK: [https://jssdk.deeplink.dev/analytics/1.4.7-beta/analytics.min.js](https
         accountId: "your_accountId",
         devToken: "your_devToken",
         cryptKey: "your_cryptKey",
-        minReportInterval: 10, // unit: s
-        maxReportNumEachTime: 50,
-        enabledInterval: true,
-        // debugMode: true
+        minReportInterval: 10, //The minimum reporting interval, with a default of 10 seconds. When enabledInterval is set to true, it also serves as the interval for periodic reporting.
+        maxReportNumEachTime: 50, //The number of events reported each time, defaults to 50.
+        enabledInterval: true, //Enable scheduled reporting (true/false)
+        // debugMode: true // Enable debug mode (disable for production)  
     })
 ```
 ### Step 4: Use the SDK
@@ -86,10 +86,10 @@ JS-SDK: [https://jssdk.deeplink.dev/analytics/1.4.7-beta/analytics.min.js](https
         accountId: "your_accountId",
         devToken: "your_devToken",
         cryptKey: "your_cryptKey",
-        minReportInterval: 10, // unit: s
-        maxReportNumEachTime: 50,
-        enabledInterval: true,
-        // debugMode: true
+        minReportInterval: 10, //The minimum reporting interval, with a default of 10 seconds. When enabledInterval is set to true, it also serves as the interval for periodic reporting.
+        maxReportNumEachTime: 50, //The number of events reported each time, defaults to 50.
+        enabledInterval: true, //Enable scheduled reporting (true/false)
+        // debugMode: true // Enable debug mode (disable for production)  
     })
 
 
